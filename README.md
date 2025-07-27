@@ -4,6 +4,7 @@ similar to spaceships, boot up the game, destroy the asteroids into smaller ones
 
 To run:
     python3 main.py
+    
 Keybinds:
 
 W: Move forward
