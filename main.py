@@ -4,7 +4,10 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import *
 from player import Player
 from asteroid import *
+from circleshape import *
+from shot import *
 import pygame
+from shot import Shot
 
 def main():
     #Initialize
@@ -21,6 +24,7 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     #Player container
     Player.containers = (updatable, drawable)
@@ -30,6 +34,9 @@ def main():
 
     #AsteroidField container
     AsteroidField.containers = (updatable,)
+
+    #Shooting Container
+    Shot.containers = (updatable, drawable, shots)
 
     #Create player position
     x = SCREEN_WIDTH / 2
@@ -49,14 +56,16 @@ def main():
         #Update player based on internal clock
         updatable.update(dt)
 
-        #Loop on drawables to draw them individually
-
-
         #Render Screen
         screen.fill("black")
         for sprite in drawable:
             sprite.draw(screen)
         pygame.display.flip()
+
+        for asteroid in asteroids:
+            if player.collision(asteroid):
+                print("Game Over!")
+                return
 
         #Set internal clock for 60 FPS
         dt_tick = dt_clock.tick(60)
