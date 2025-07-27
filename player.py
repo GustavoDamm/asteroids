@@ -40,8 +40,6 @@ class Player(CircleShape):
             if self.shoot_timer <= 0:
                 self.shoot()
                 self.shoot_timer = PLAYER_SHOOT_COOLDOWN
-            
-
     
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)

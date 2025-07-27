@@ -66,6 +66,10 @@ def main():
             if player.collision(asteroid):
                 print("Game Over!")
                 return
+            for shot in shots:
+                if asteroid.collision(shot):
+                    shot.kill()
+                    asteroid.split()
 
         #Set internal clock for 60 FPS
         dt_tick = dt_clock.tick(60)
